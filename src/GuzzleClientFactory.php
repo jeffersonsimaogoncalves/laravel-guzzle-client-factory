@@ -65,20 +65,32 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
      */
     private array $middleware = [];
 
+    /**
+     * @inheritDoc
+     */
     final public function __construct()
     {
     }
 
+    /**
+     * @inheritDoc
+     */
     public static function new(): static
     {
         return new static();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getBaseUri(): string
     {
         return $this->baseUri;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function setBaseUri(string $uri): self
     {
         $this->baseUri = $uri;
@@ -86,11 +98,17 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
         return $this;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getTimeout(): int
     {
         return $this->timeout;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function setTimeout(int $timeout): self
     {
         $this->timeout = $timeout;
@@ -98,11 +116,17 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
         return $this;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getCookieJar(): CookieJarInterface | bool
     {
         return $this->cookieJar;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function setCookieJar(CookieJarInterface | bool $cookieJar): self
     {
         $this->cookieJar = $cookieJar;
@@ -158,6 +182,9 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
         return $this;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function addHeader(string $key, string $value): self
     {
         $this->headers[$key] = $value;
@@ -166,15 +193,18 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * Getter for headers to be used with each request.
+     * The ClientFactoryInterface specifies this method.
      *
-     * @return array<string, string>
+     * @inheritDoc
      */
     public function getHeaders(): array
     {
         return $this->headers;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function addMiddleware(callable $middleware): self
     {
         $this->middleware[] = $middleware;
@@ -183,15 +213,16 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * Getter for the middlewares to be used with each request.
-     *
-     * @return array<int, callable>
+     * @inheritDoc
      */
     public function getMiddlewares(): array
     {
         return $this->middleware;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function create(): ClientInterface
     {
         $stack = HandlerStack::create($this->getHandler());

@@ -1,6 +1,6 @@
 {
     "name": "einar-hansen/guzzle-client-factory",
-    "description": "Common interface for HTTP client factories",
+    "description": "Guzzle Http Client factory",
     "keywords": [
         "einar-hansen",
         "http",
@@ -25,20 +25,13 @@
         "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.8",
         "laravel/pint": "^1.0",
-        "nunomaduro/collision": "^6.1",
         "nunomaduro/larastan": "^2.1"
     },
     "autoload": {
         "psr-4": {
             "EinarHansen\\Http\\Guzzle\\": "src"
         }
-    },
-    "scripts": {
-        "analyse": "vendor/bin/phpstan analyse",
-        "baseline": "vendor/bin/phpstan analyse --generate-baseline",
-        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
     },
     "config": {
         "sort-packages": true
