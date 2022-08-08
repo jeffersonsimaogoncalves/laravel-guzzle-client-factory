@@ -2,8 +2,10 @@
 
 declare(strict_type=1);
 
-namespace EinarJohan\Http\Factories;
+namespace EinarHansen\Http\Guzzle;
 
+use EinarHansen\Http\Factories\ClientFactoryInterface;
+use EinarHansen\Http\Factories\ClientWithMiddlewareInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJarInterface;
 use GuzzleHttp\Handler\CurlHandler;
@@ -16,13 +18,51 @@ use Psr\Http\Client\NetworkExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class GuzzleClientFactory implements HttpClientFactoryInterface, HttpClientFactoryWithCookieJarInterface, HttpClientFactoryWithMiddlwareInterface
+class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJarInterface, ClientWithMiddlewareInterface
 {
+    /**
+     * The Guzzle handler to be implemented.
+     *
+     * @var \GuzzleHttp\Handler\CurlHandler|\GuzzleHttp\Handler\MockHandler
+     */
     private CurlHandler | MockHandler $handler;
+
+    /**
+     * The base URI to be used.
+     *
+     * @var string
+     */
     private string $baseUri = '';
+
+    /**
+     * The number of seconds a request should be allowed to run.
+     *
+     * @var int
+     */
     private int $timeout = 60;
+
+    /**
+     * The headers that should be sent with each request.
+     *
+     * @var array<string, string>
+     */
     private array $headers = [];
+
+    /**
+     * If we should use cookies. It defaults to false.
+     * false: we should not use cookies.
+     * true: we use a cookiejar that is saved as an array (not persited)
+     * CookieJarInterface: You can provide you own implementation of Cookies.
+     *
+     * @var \GuzzleHttp\Cookie\CookieJarInterface|bool
+     */
     private CookieJarInterface | bool $cookieJar = false;
+
+    /**
+     * The middlewares that should be added to each request.
+     *
+     * @var array<int, callable>
+     */
     private array $middleware = [];
 
     final public function __construct()
@@ -74,7 +114,7 @@ class GuzzleClientFactory implements HttpClientFactoryInterface, HttpClientFacto
         callable $decider = null,
         callable $delay = null,
         int $maxRetries = 3
-    ) {
+    ): self {
         $this->middleware[] = Middleware::retry(
             $decider ?? function (
                 $retries,
@@ -106,12 +146,12 @@ class GuzzleClientFactory implements HttpClientFactoryInterface, HttpClientFacto
         return $this;
     }
 
-    public function getHandler()
+    public function getHandler(): CurlHandler|MockHandler
     {
         return $this->handler;
     }
 
-    public function setHandler($handler): self
+    public function setHandler(CurlHandler|MockHandler $handler): self
     {
         $this->handler = $handler;
 
@@ -125,18 +165,28 @@ class GuzzleClientFactory implements HttpClientFactoryInterface, HttpClientFacto
         return $this;
     }
 
+    /**
+     * Getter for headers to be used with each request.
+     *
+     * @return array<string, string>
+     */
     public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function addMiddleware($middleware): self
+    public function addMiddleware(callable $middleware): self
     {
         $this->middleware[] = $middleware;
 
         return $this;
     }
 
+    /**
+     * Getter for the middlewares to be used with each request.
+     *
+     * @return array<int, callable>
+     */
     public function getMiddlewares(): array
     {
         return $this->middleware;

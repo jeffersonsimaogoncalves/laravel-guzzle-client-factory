@@ -1,12 +1,19 @@
 Guzzle Client Factory
 ===========
 
-This repository holds all the common code related to [PSR-18 (HTTP Client)][psr-url].
+This repository holds the interface for new http factories that return a [PSR-18 (HTTP Client)][psr-url] client.
 
-Note that this is not a HTTP Client implementation of its own. It is merely abstractions that describe the components of a HTTP Client.
+Note that this is not a HTTP Client Factory implementation. For an example, checkout the [Guzzle Client Factory][guzzle-client-url]
 
-The installable [package][package-url] and [implementations][implementation-url] are listed on Packagist.
+The installable [package][package-url] and [dependents][implementation-url] are listed on Packagist.
 
 [psr-url]: https://www.php-fig.org/psr/psr-18
-[package-url]: https://packagist.org/packages/psr/http-client
-[implementation-url]: https://packagist.org/providers/psr/http-client-implementation
+[package-url]: https://packagist.org/packages/einar-hansen/http-client-factory
+[guzzle-client-url]: https://packagist.org/packages/einar-hansen/guzzle-client-factory
+[implementation-url]: https://packagist.org/packages/einar-hansen/http-client-factory/dependents
+
+```bash
+# Testing
+docker run --rm --interactive --tty --volume $(pwd):/app composer install
+docker run -it -v $(pwd):/app  php:8.1-alpine /app/vendor/bin/phpstan --level=9 analyse /app/src
+```

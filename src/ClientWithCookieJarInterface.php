@@ -2,11 +2,11 @@
 
 declare(strict_type=1);
 
-namespace EinarJohan\Http\Factories;
+namespace EinarHansen\Http\Guzzle;
 
 use GuzzleHttp\Cookie\CookieJarInterface;
 
-interface HttpClientFactoryWithCookieJarInterface
+interface ClientWithCookieJarInterface
 {
     public function getCookieJar(): CookieJarInterface | bool;
 

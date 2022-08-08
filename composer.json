@@ -1,37 +1,38 @@
 {
-    "name": "einar-johan/guzzle-client-factory",
+    "name": "einar-hansen/guzzle-client-factory",
     "description": "Common interface for HTTP client factories",
     "keywords": [
-        "einar-johan",
+        "einar-hansen",
         "http",
         "http-client",
         "guzzle-client-factory",
         "psr",
         "psr-18"
     ],
-    "homepage": "https://github.com/einar-johan/guzzle-client-factory",
+    "homepage": "https://github.com/einar-hansen/guzzle-client-factory",
     "license": "MIT",
     "authors": [
         {
-            "name": "Einar-Johan Hansen",
-            "email": "hello@einarhansen.io",
+            "name": "Einar Hansen",
+            "email": "einar@einarhansen.dev",
+            "homepage": "https://einarhansen.dev",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.0",
-        "guzzlehttp/guzzle": "^7.0",
-        "psr/http-message": "^1.0",
-        "psr/http-client": "^1.0"
+        "einar-hansen/http-client-factory": "^1.1",
+        "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.8",
+        "laravel/pint": "^1.0",
         "nunomaduro/collision": "^6.1",
         "nunomaduro/larastan": "^2.1"
     },
     "autoload": {
         "psr-4": {
-            "EinarJohan\\Http\\Factories\\": "src"
+            "EinarHansen\\Http\\Guzzle\\": "src"
         }
     },
     "scripts": {
