@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_type=1);
+declare(strict_types=1);
 
 namespace EinarHansen\Http\Guzzle;
 
@@ -66,14 +66,14 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     private array $middleware = [];
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     final public function __construct()
     {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public static function new(): static
     {
@@ -81,7 +81,7 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getBaseUri(): string
     {
@@ -89,7 +89,7 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setBaseUri(string $uri): self
     {
@@ -99,7 +99,7 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getTimeout(): int
     {
@@ -107,7 +107,7 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setTimeout(int $timeout): self
     {
@@ -117,7 +117,7 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getCookieJar(): CookieJarInterface | bool
     {
@@ -125,7 +125,7 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setCookieJar(CookieJarInterface | bool $cookieJar): self
     {
@@ -183,7 +183,7 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function addHeader(string $key, string $value): self
     {
@@ -195,7 +195,7 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     /**
      * The ClientFactoryInterface specifies this method.
      *
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getHeaders(): array
     {
@@ -203,7 +203,7 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function addMiddleware(callable $middleware): self
     {
@@ -213,7 +213,7 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getMiddlewares(): array
     {
@@ -221,7 +221,7 @@ class GuzzleClientFactory implements ClientFactoryInterface, ClientWithCookieJar
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function create(): ClientInterface
     {
